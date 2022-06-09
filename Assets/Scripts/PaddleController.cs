@@ -42,6 +42,8 @@ public class PaddleController : MonoBehaviour
 
     private void MoveObject(Vector2 movement)
     {
+        Debug.Log("Movement (" + this.name + "): " + movement);
+
         rig.velocity = movement;
     }
 }
