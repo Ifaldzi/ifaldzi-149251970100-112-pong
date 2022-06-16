@@ -16,4 +16,9 @@ public class MainMenuController : MonoBehaviour
     {
         Debug.Log("Created by ifaldzi");
     }
+
+    public void OpenCredit()
+    {
+        SceneManager.LoadScene("Credit Scene");
+    }
 }
