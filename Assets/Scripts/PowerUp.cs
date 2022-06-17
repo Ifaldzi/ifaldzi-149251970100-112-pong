@@ -7,18 +7,13 @@ public abstract class PowerUp : MonoBehaviour
     public Collider2D ball;
 
     public float maxSpawnTime;
+    public float magnitude;
 
     public PowerUpManager manager;
 
     private float spawnTime;
 
     public abstract void ActivatePowerUp();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,6 +22,7 @@ public abstract class PowerUp : MonoBehaviour
 
         if (spawnTime >= maxSpawnTime)
         {
+            Debug.Log(name + " removed");
             manager.RemovePowerUp(gameObject);
         }
     }

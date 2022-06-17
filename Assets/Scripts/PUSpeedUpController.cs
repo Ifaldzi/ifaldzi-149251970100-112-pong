@@ -2,33 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PUSpeedUpController : MonoBehaviour
+public class PUSpeedUpController : PowerUp
 {
-    public Collider2D ball;
-    public float magnitude;
-
-    public float maxSpawnTime;
-
-    public PowerUpManager manager;
-
-    private float spawnTime;
-
-    private void Update()
+    public override void ActivatePowerUp()
     {
-        spawnTime += Time.deltaTime;
-
-        if (spawnTime >= maxSpawnTime)
-        {
-            manager.RemovePowerUp(gameObject);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision == ball)
-        {
-            ball.GetComponent<BallController>().SpeedUp(magnitude);
-            manager.RemovePowerUp(gameObject);
-        }
+        ball.GetComponent<BallController>().SpeedUp(magnitude);
     }
 }

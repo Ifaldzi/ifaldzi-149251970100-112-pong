@@ -5,20 +5,23 @@ using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
-    public int speed;
+    public int defaultSpeed;
     public Vector3 defaultScale;
 
     public KeyCode upKey;
     public KeyCode downKey;
 
     private Rigidbody2D rig;
+    private int speed;
 
     private float longPUTime;
+    private float speedPUTime;
 
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        speed = defaultSpeed;
     }
 
     // Update is called once per frame
@@ -29,6 +32,7 @@ public class PaddleController : MonoBehaviour
         MoveObject(movement);
 
         CountDownPowerUp(ref longPUTime, ResetPaddleLong);
+        CountDownPowerUp(ref speedPUTime, ResetPaddleSpeed);
     }
 
     private Vector2 GetInput()
@@ -48,7 +52,7 @@ public class PaddleController : MonoBehaviour
 
     private void MoveObject(Vector2 movement)
     {
-        //Debug.Log("Movement (" + this.name + "): " + movement);
+        Debug.Log("Movement (" + this.name + "): " + movement);
 
         rig.velocity = movement;
     }
@@ -63,6 +67,18 @@ public class PaddleController : MonoBehaviour
     private void ResetPaddleLong()
     {
         transform.localScale = defaultScale;
+    }
+
+    public void SpeedUp(float magnitude, float duration)
+    {
+        speed = defaultSpeed * (int) magnitude;
+
+        speedPUTime += duration;
+    }
+
+    private void ResetPaddleSpeed()
+    {
+        speed = defaultSpeed;
     }
 
     private void CountDownPowerUp(ref float powerUpTime, Action callback)
